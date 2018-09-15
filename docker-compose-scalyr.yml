@@ -23,12 +23,5 @@ services:
        WORDPRESS_DB_HOST: db:3306
        WORDPRESS_DB_USER: wordpress
        WORDPRESS_DB_PASSWORD: wordpress
-
-#   scalyr:
-#     image: scalyr/scalyr-docker-agent
-#     volumes:
-#       - ${WEBAPP_STORAGE_HOME}/scalyr-agent-2/agent.d:/etc/scalyr-agent-2/agent.d
-#     ports:
-#       - "601:601"
 volumes:
     db_data:
