@@ -18,13 +18,13 @@ cd ~
 rm -rf container
 mkdir container
 cd container
-git clone https://github.com/cacorg/WPYAML-Files
-cd WPYAML-Files
+git clone https://github.com/jmorascalyr/azure-config
+cd azure-config
 
 #Create APP SERVICE ELEMENTS
 az group create --name $ACI_PERS_RESOURCE_GROUP --location "$ACI_PERS_LOCATION"
 az appservice plan create --name $ACI_APP_SERVICE_PLAN --resource-group $ACI_PERS_RESOURCE_GROUP --sku S1 --is-linux
-az webapp create --resource-group $ACI_PERS_RESOURCE_GROUP --plan $ACI_APP_SERVICE_PLAN --name $ACI_APPNAME --multicontainer-config-type compose --multicontainer-config-file docker-compose-wordpress.yml
+az webapp create --resource-group $ACI_PERS_RESOURCE_GROUP --plan $ACI_APP_SERVICE_PLAN --name $ACI_APPNAME --multicontainer-config-type compose --multicontainer-config-file docker-compose-scalyr.yml
 #PERSISTENT STORAGE
 az webapp config appsettings set  --resource-group $ACI_PERS_RESOURCE_GROUP --name $ACI_APPNAME --settings WEBSITES_ENABLE_APP_SERVICE_STORAGE=TRUE
 
@@ -35,8 +35,8 @@ az webapp config appsettings set  --resource-group $ACI_PERS_RESOURCE_GROUP --na
 #az webapp config appsettings set --subscription $ACI_SUBSCRIPTION --resource-group $ACI_PERS_RESOURCE_GROUP --name $ACI_APPNAME --settings WORDPRESS_DB_HOST="$WORDPRESS_DB_HOST" WORDPRESS_DB_USER="$WORDPRESS_DB_USER" WORDPRESS_DB_PASSWORD="$WORDPRESS_DB_PASSWORD" WORDPRESS_DB_NAME="$WORDPRESS_DB_NAME"
 
 #UPDATE WEBAPP
-az webapp config container set --resource-group $ACI_PERS_RESOURCE_GROUP --name $ACI_APPNAME --multicontainer-config-type compose --multicontainer-config-file docker-compose-wordpress.yml
-
+az webapp config container set --resource-group $ACI_PERS_RESOURCE_GROUP --name $ACI_APPNAME --multicontainer-config-type compose --multicontainer-config-file docker-compose-scalyr.yml
+open -a "Google Chrome" https://$ACI_APPNAME.azurewebsites.net
 #PERSISTENT STORAGE
 
 #az webapp config appsettings set --subscription $ACI_SUBSCRIPTION --resource-group $ACI_PERS_RESOURCE_GROUP --name $ACI_APPNAME --settings WEBSITES_ENABLE_APP_SERVICE_STORAGE=TRUE
