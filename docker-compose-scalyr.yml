@@ -15,6 +15,7 @@ services:
      image: scalyr/scalyr-docker-agent
      volumes:
        - ${WEBAPP_STORAGE_HOME}/scalyr-agent-2/agent.d:/etc/scalyr-agent-2/agent.d
+       - /var/run/docker.sock:/var/scalyr/docker.sock
      ports:
        - "601:601"
    wordpress:
