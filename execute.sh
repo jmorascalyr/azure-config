@@ -28,6 +28,11 @@ az webapp create --resource-group $ACI_PERS_RESOURCE_GROUP --plan $ACI_APP_SERVI
 #PERSISTENT STORAGE
 az webapp config appsettings set  --resource-group $ACI_PERS_RESOURCE_GROUP --name $ACI_APPNAME --settings WEBSITES_ENABLE_APP_SERVICE_STORAGE=TRUE
 
+az extension add -n webapp
+az extension update -n webapp
+az webapp remote-connection create -g $ACI_PERS_RESOURCE_GROUP -n $ACI_PERS_RESOURCE_GROUP -p 9000
+
+
 # Create Persistent sQL DB
 #az mysql server create --subscription $ACI_SUBSCRIPTION --resource-group $ACI_PERS_RESOURCE_GROUP --name $ACI_SQL  --location "$ACI_PERS_LOCATION" --admin-user $WORDPRESS_DB_NAME --admin-password $WORDPRESS_DB_PASSWORD --sku-name B_Gen4_1 --version 5.7
 #az mysql server firewall-rule create --name ACI_FIREWALL --server $ACI_SQL --subscription $ACI_SUBSCRIPTION --resource-group $ACI_PERS_RESOURCE_GROUP --start-ip-address 0.0.0.0 --end-ip-address 0.0.0.0
