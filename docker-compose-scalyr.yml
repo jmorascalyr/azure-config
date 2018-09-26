@@ -3,17 +3,12 @@ version: '3.3'
 services:
 
    scalyr:
-    image: scalyr/scalyr-docker-agent
-    environment:
-      DOCKER_HOST_NAME: api-production
-    stdin_open: true
-    volumes:
-    - ${WEBAPP_STORAGE_HOME}/scalyr-agent-2/agent.d/api_key.json:/etc/scalyr-agent-2/agent.d/api_key.json
-    - /var/run/docker.sock:/var/scalyr/docker.sock
-    tty: true
-    ports:
-    - 601:601/tcp
-
+      image: scalyr/scalyr-docker-agent
+      volumes:
+      - ${WEBAPP_STORAGE_HOME}/scalyr-agent-2/agent.d/api_key.json:/etc/scalyr-agent-2/agent.d/api_key.json
+      - /var/run/docker.sock:/var/scalyr/docker.sock
+      ports:
+      - 601:601
 
    db:
      image: mysql:5.7
@@ -22,7 +17,7 @@ services:
      logging:
            driver: "syslog"
            options:
-             syslog-address: "tcp://127.0.0.1:601"
+             syslog-address: "udp://127.0.0.1:601"
      restart: always
      environment:
        MYSQL_ROOT_PASSWORD: somewordpress
@@ -42,7 +37,7 @@ services:
      logging:
            driver: "syslog"
            options:
-             syslog-address: "tcp://127.0.0.1:601"
+             syslog-address: "udp://127.0.0.1:601"
      restart: always
      environment:
        WORDPRESS_DB_HOST: db:3306
