@@ -13,7 +13,7 @@ services:
     tty: true
     ports:
     - 601:601/tcp
-    - 5501:5501/tcp
+
 
    db:
      image: mysql:5.7
