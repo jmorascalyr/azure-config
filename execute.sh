@@ -46,7 +46,8 @@ echo webapp created
 az webapp config appsettings set  --resource-group $ACI_PERS_RESOURCE_GROUP --name $ACI_APPNAME --settings WEBSITES_ENABLE_APP_SERVICE_STORAGE=TRUE &>/dev/null
 
 echo persistent storage has been setup
-
+az webapp log config --resource-group $ACI_PERS_RESOURCE_GROUP --name $ACI_APPNAME --docker-container-logging filesystem
+echo logging has been enabled 
 # az extension add -n webapp
 # az extension update -n webapp
 # az webapp remote-connection create -g $ACI_PERS_RESOURCE_GROUP -n $ACI_PERS_RESOURCE_GROUP -p 9000

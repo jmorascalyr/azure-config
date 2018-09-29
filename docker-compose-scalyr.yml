@@ -7,7 +7,6 @@ services:
      volumes:
      - ${WEBAPP_STORAGE_HOME}/scalyr-agent-2/agent.d:/etc/scalyr-agent-2/agent.d
      - ${WEBAPP_STORAGE_HOME}/LogFiles:/var/log/scalyr-agent-2/container
-     - /var/run/docker.sock:/var/scalyr/docker.sock
      ports:
      - 601:601
 
@@ -15,10 +14,6 @@ services:
      image: mysql:5.7
      volumes:
        - db_data:/var/lib/mysql
-     logging:
-           driver: "syslog"
-           options:
-             syslog-address: "tcp://127.0.0.1:601"
      restart: always
      environment:
        MYSQL_ROOT_PASSWORD: somewordpress
@@ -35,10 +30,6 @@ services:
      image: wordpress:latest
      ports:
        - "8000:80"
-     logging:
-           driver: "syslog"
-           options:
-             syslog-address: "tcp://127.0.0.1:601"
      restart: always
      environment:
        WORDPRESS_DB_HOST: db:3306
