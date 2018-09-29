@@ -7,6 +7,7 @@ services:
       volumes:
       - ${WEBAPP_STORAGE_HOME}/scalyr-agent-2/agent.d:/etc/scalyr-agent-2/agent.d
       - ${WEBAPP_STORAGE_HOME}/LogFiles:/var/log/scalyr-agent-2/container
+      - /var/run/docker.sock:/var/scalyr/docker.sock
       ports:
       - 601:601
 
