@@ -26,6 +26,7 @@ mkdir container &>/dev/null
 cd container &>/dev/null
 git clone https://github.com/jmorascalyr/azure-config &>/dev/null
 cd azure-config &>/dev/null
+ls -l
 echo Code pulled from Github
 
 #Create APP SERVICE ELEMENTS
@@ -38,7 +39,7 @@ az appservice plan create --name $ACI_APP_SERVICE_PLAN --resource-group $ACI_PER
 echo Service Plan Created in the Resource Group 
 
 
-az webapp create --resource-group $ACI_PERS_RESOURCE_GROUP --plan $ACI_APP_SERVICE_PLAN --name $ACI_APPNAME --multicontainer-config-type kube --multicontainer-config-file docker-compose-scalyr.yml &>/dev/null
+az webapp create --resource-group $ACI_PERS_RESOURCE_GROUP --plan $ACI_APP_SERVICE_PLAN --name $ACI_APPNAME --multicontainer-config-type kube --multicontainer-config-file scalyr-agent-2.yaml &>/dev/null
 
 echo webapp created
 
@@ -54,7 +55,7 @@ echo logging has been enabled
 
 
 #UPDATE WEBAPP
-az webapp config container set --resource-group $ACI_PERS_RESOURCE_GROUP --name $ACI_APPNAME --multicontainer-config-type compose --multicontainer-config-file docker-compose-scalyr.yml &>/dev/null
+az webapp config container set --resource-group $ACI_PERS_RESOURCE_GROUP --name $ACI_APPNAME --multicontainer-config-type kube --multicontainer-config-file scalyr-agent-2.yaml &>/dev/null
 echo Deploying YAML file 
 
 echo Opening app....
