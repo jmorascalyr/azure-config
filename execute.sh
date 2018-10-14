@@ -38,7 +38,7 @@ az appservice plan create --name $ACI_APP_SERVICE_PLAN --resource-group $ACI_PER
 echo Service Plan Created in the Resource Group 
 
 
-az webapp create --resource-group $ACI_PERS_RESOURCE_GROUP --plan $ACI_APP_SERVICE_PLAN --name $ACI_APPNAME --multicontainer-config-type compose --multicontainer-config-file docker-compose-scalyr.yml &>/dev/null
+az webapp create --resource-group $ACI_PERS_RESOURCE_GROUP --plan $ACI_APP_SERVICE_PLAN --name $ACI_APPNAME --multicontainer-config-type kube --multicontainer-config-file docker-compose-scalyr.yml &>/dev/null
 
 echo webapp created
 
