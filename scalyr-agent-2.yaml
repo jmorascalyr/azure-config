@@ -14,10 +14,7 @@ spec:
         imagePullPolicy: Always
         env:
           - name: SCALYR_API_KEY
-            valueFrom:
-              secretKeyRef:
-                name: scalyr-api-key
-                key: scalyr-api-key
+            value: 0FRQ9bPpXOYeXCT2xEToTkkw0BWtL4xnl3MkghbypXa8-
         resources:
           limits:
             memory: 500Mi
